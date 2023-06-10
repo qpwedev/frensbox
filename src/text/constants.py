@@ -1,1 +1,0 @@
-MAIN_MENU_TEXT = "Main Menu"
