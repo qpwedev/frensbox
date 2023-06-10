@@ -1,6 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useProfile, usePublications, Profile } from "@lens-protocol/react-web";
+import {
+  useProfile,
+  usePublications,
+  Profile,
+  useActiveProfile,
+} from "@lens-protocol/react-web";
 import { formatPicture } from "../../../utils";
 import { FollowButton } from "../../FollowButton";
 
@@ -8,9 +13,11 @@ export default function Profile() {
   const pathName = usePathname();
   const handle = pathName?.split("/")[2];
 
-  let { data: profile, loading } = useProfile({ handle });
+  let { data: profile, loading: loadingProfile } = useProfile({ handle });
+  const { data: activeProfile, loading: loadingActive } = useActiveProfile();
 
-  if (loading) return <p className="p-14">Loading ...</p>;
+  if (loadingProfile || loadingActive)
+    return <p className="p-14">Loading ...</p>;
 
   return (
     <div>
@@ -24,7 +31,7 @@ export default function Profile() {
             src={formatPicture(profile.picture)}
           />
         )}
-        <FollowButton followee={profile!} />
+        <FollowButton followee={profile!} follower={activeProfile!} />
         <h1 className="text-3xl my-3">{profile?.handle}</h1>
         <h3 className="text-xl mb-4">{profile?.bio}</h3>
         {profile && <Publications profile={profile} />}

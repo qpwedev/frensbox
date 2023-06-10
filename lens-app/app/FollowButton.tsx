@@ -2,10 +2,13 @@ import {
   FollowPolicy,
   FollowPolicyType,
   Profile,
+  ProfileOwnedByMe,
+  useFollow,
 } from "@lens-protocol/react-web";
 
 type FollowButtonProps = {
   followee: Profile;
+  follower: ProfileOwnedByMe;
 };
 
 function formatButtonText(policy: FollowPolicy): string {
@@ -23,18 +26,26 @@ function formatButtonText(policy: FollowPolicy): string {
   }
 }
 
-export function FollowButton({ followee }: FollowButtonProps) {
-  console.log(followee);
+export function FollowButton({ followee, follower }: FollowButtonProps) {
+  const {
+    execute: follow,
+    error,
+    isPending,
+  } = useFollow({ followee, follower });
 
-  if (followee?.followStatus?.isFollowedByMe) {
-    return <p>You are following {followee.handle}</p>;
-  }
+  console.log(followee);
+  console.log(followee?.followStatus?.canFollow);
+  console.log(isPending);
 
   return (
     <>
-      {followee?.followStatus?.canFollow && (
-        <button disabled={!followee?.followStatus?.canFollow}> Follow </button>
+      {!isPending && (
+        <button onClick={follow} disabled={!followee?.followStatus?.canFollow}>
+          {formatButtonText(followee.followPolicy)}
+        </button>
       )}
+
+      {error && <small>{error.message}</small>}
     </>
   );
 }
