@@ -1,5 +1,5 @@
 <p align="center" style="color: #444">
-  <h1 align="center">🌐 FrensBox</h1>
+  <h1 align="center">📦 FrensBox</h1>
 </p>
 <p align="center" style="font-size: 1.2rem;">Revolutionizing networking with decentralization and human connection</p>
 
