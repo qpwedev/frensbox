@@ -23,8 +23,7 @@ export default function Home() {
   };
 
   const handleSearchSubmit = (event: any) => {
-    event.preventDefault(); // this prevents the page from reloading
-    // the navigation will be handled by the Link component
+    event.preventDefault();
   };
 
   const { execute: login, isPending: isLoginPending } = useWalletLogin();
