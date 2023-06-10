@@ -8,8 +8,8 @@ import {
   useActiveProfile,
 } from "@lens-protocol/react-web";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
 import { useState } from "react";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 export default function Home() {
   const { data: profiles } = useExploreProfiles({
@@ -33,15 +33,20 @@ export default function Home() {
   const { disconnectAsync } = useDisconnect();
 
   const { connectAsync } = useConnect({
-    connector: new InjectedConnector(),
+    connector: new WalletConnectConnector({
+      options: {
+        projectId: "32919b4dd70531b357d5510cb44dca37",
+      },
+    }),
   });
 
   const onLoginClick = async () => {
     if (isConnected) {
       await disconnectAsync();
     }
+
     const { connector } = await connectAsync();
-    if (connector instanceof InjectedConnector) {
+    if (connector instanceof WalletConnectConnector) {
       const signer = await connector.getSigner();
       await login(signer);
     }
