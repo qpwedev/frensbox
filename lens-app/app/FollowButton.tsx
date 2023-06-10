@@ -1,6 +1,7 @@
 import {
   FollowPolicy,
   FollowPolicyType,
+  FollowStatus,
   Profile,
   ProfileOwnedByMe,
   useFollow,
@@ -11,7 +12,16 @@ type FollowButtonProps = {
   follower: ProfileOwnedByMe;
 };
 
-function formatButtonText(policy: FollowPolicy): string {
+function formatButtonText(
+  policy: FollowPolicy,
+  followStatus: FollowStatus
+): string {
+  console.log(policy, followStatus);
+
+  if (followStatus?.isFollowedByMe === true) {
+    return "Following";
+  }
+
   switch (policy.type) {
     case FollowPolicyType.ONLY_PROFILE_OWNERS:
     case FollowPolicyType.ANYONE:
@@ -39,9 +49,9 @@ export function FollowButton({ followee, follower }: FollowButtonProps) {
 
   return (
     <>
-      {!isPending && (
+      {!isPending && followee?.followStatus && (
         <button onClick={follow} disabled={!followee?.followStatus?.canFollow}>
-          {formatButtonText(followee.followPolicy)}
+          {formatButtonText(followee.followPolicy, followee.followStatus!)}
         </button>
       )}
 
