@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import { useProfile, usePublications, Profile } from "@lens-protocol/react-web";
 import { formatPicture } from "../../../utils";
+import { FollowButton } from "../../FollowButton";
 
 export default function Profile() {
   const pathName = usePathname();
@@ -23,6 +24,7 @@ export default function Profile() {
             src={formatPicture(profile.picture)}
           />
         )}
+        <FollowButton followee={profile!} />
         <h1 className="text-3xl my-3">{profile?.handle}</h1>
         <h3 className="text-xl mb-4">{profile?.bio}</h3>
         {profile && <Publications profile={profile} />}
