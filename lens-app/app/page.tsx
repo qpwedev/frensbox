@@ -66,8 +66,11 @@ export default function Home() {
       )}
       {wallet && !loading && (
         <div>
-          <h3 className="text-3xl">{wallet.handle}</h3>
+          <Link href={`/profile/${wallet.handle}`}>
+            <h3 className="text-3xl">{wallet.handle}</h3>
+          </Link>
           <p>{wallet.bio}</p>
+
           <button
             onClick={logout}
             className="mt-2 px-6 py-1 bg-white text-black rounded"
