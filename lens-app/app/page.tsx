@@ -1,5 +1,8 @@
 "use client";
-import { useExploreProfiles } from "@lens-protocol/react-web";
+import {
+  useExploreProfiles,
+  useProfileFollowing,
+} from "@lens-protocol/react-web";
 import Link from "next/link";
 import { formatPicture } from "../utils";
 import {
@@ -12,10 +15,6 @@ import { useState } from "react";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 export default function Home() {
-  const { data: profiles } = useExploreProfiles({
-    limit: 25,
-  });
-
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearchChange = (event: any) => {
@@ -31,6 +30,20 @@ export default function Home() {
   const { data: wallet, loading } = useActiveProfile();
   const { isConnected } = useAccount();
   const { disconnectAsync } = useDisconnect();
+
+  const { data: profiles } = useExploreProfiles({
+    limit: 25,
+  });
+
+  const {
+    data: following,
+    loading: loadingFollowing,
+    hasMore,
+    next,
+  } = useProfileFollowing({
+    walletAddress: wallet?.ownedBy || "",
+    limit: 50,
+  });
 
   const { connectAsync } = useConnect({
     connector: new WalletConnectConnector({
@@ -100,22 +113,23 @@ export default function Home() {
         )}
       </form>
 
-      <h1 className="text-5xl">My Lens App</h1>
-      {profiles?.map((profile, index) => (
-        <Link href={`/profile/${profile.handle}`} key={index}>
+      <h1 className="text-5xl">My Lens Frens</h1>
+      {following?.map((following, index) => (
+        <Link href={`/profile/${following.profile.handle}`} key={index}>
           <div className="my-14">
-            {profile.picture && profile.picture.__typename === "MediaSet" ? (
+            {following.profile.picture &&
+            following.profile.picture.__typename === "MediaSet" ? (
               <img
-                src={formatPicture(profile.picture)}
+                src={formatPicture(following.profile.picture)}
                 width="120"
                 height="120"
-                alt={profile.handle}
+                alt={following.profile.handle}
               />
             ) : (
               <div className="w-14 h-14 bg-slate-500  " />
             )}
-            <h3 className="text-3xl my-4">{profile.handle}</h3>
-            <p className="text-xl">{profile.bio}</p>
+            <h3 className="text-3xl my-4">{following.profile.handle}</h3>
+            <p className="text-xl">{following.profile.bio}</p>
           </div>
         </Link>
       ))}
