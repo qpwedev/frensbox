@@ -2,6 +2,7 @@
 import {
   Following,
   useExploreProfiles,
+  useFollow,
   useProfileFollowing,
 } from "@lens-protocol/react-web";
 import Link from "next/link";
@@ -41,6 +42,12 @@ export default function Home() {
   const { data: profiles } = useExploreProfiles({
     limit: 25,
   });
+
+  // const {
+  //   execute: follow,
+  //   error,
+  //   isPending,
+  // } = useFollow({ followee, follower });
 
   const {
     data: following,
@@ -164,11 +171,13 @@ function MainScreen({ frens }: { frens: Following[] }) {
           <p className="main-screen-heading-frens-text">frens</p>
         </div>
         <div className="main-screen-heading-lower-row">
+          <input
+            className="main-screen-heading-lower-row-input"
+            type="text"
+            // onSubmit={handleFollowSubmit}
+          />
           <button className="main-screen-heading-lower-row-button">
             add frens
-          </button>
-          <button className="main-screen-heading-lower-row-button">
-            view frens
           </button>
         </div>
       </div>
