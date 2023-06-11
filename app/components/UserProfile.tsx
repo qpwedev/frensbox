@@ -4,16 +4,10 @@ import useEVMBalance, { AvailableChains } from "../hooks/useEVMBalance";
 import useGnoBalance from "../hooks/useGnoBalance";
 import { formatPicture } from "@/utils";
 
-function UserProfile({
-  following,
-  key,
-}: {
-  following: Following;
-  key: number;
-}) {
+function UserProfile({ following }: { following: Following }) {
   console.log();
   return (
-    <Link href={`/profile/${following.profile.handle}`} key={key}>
+    <Link href={`/profile/${following.profile.handle}`}>
       <div className="my-14">
         {following.profile.picture &&
         following.profile.picture.__typename === "MediaSet" ? (

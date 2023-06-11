@@ -13,6 +13,7 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useState } from "react";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import UserProfile from "./components/UserProfile";
+import LensExploreProfiles from "./components/LensExploreProfiles";
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState("");
@@ -117,10 +118,7 @@ export default function Home() {
       </form>
 
       {/* Explore component LensExploreProfiles */}
-      <h1 className="text-5xl">My Lens Frens</h1>
-      {following?.map((following, index) => (
-        <UserProfile following={following} key={index} />
-      ))}
+      <LensExploreProfiles following={following || []} />
     </div>
   );
 }
