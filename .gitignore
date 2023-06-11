@@ -337,3 +337,6 @@ Temporary Items
 .vscode/*
 
 settings.json
+
+
+bot/config.py

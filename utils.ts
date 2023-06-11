@@ -1,4 +1,3 @@
-// utils.ts
 export function formatPicture(picture: any) {
     if (picture.__typename === 'MediaSet') {
         if (picture.original.url.startsWith('ipfs://')) {

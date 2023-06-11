@@ -7,7 +7,7 @@ import {
   useActiveProfile,
 } from "@lens-protocol/react-web";
 import { formatPicture } from "../../../utils";
-import { FollowButton } from "../../FollowButton";
+import { FollowButton } from "../../components/FollowButton";
 
 export default function Profile() {
   const pathName = usePathname();
