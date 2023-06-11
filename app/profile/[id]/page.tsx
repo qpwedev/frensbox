@@ -10,6 +10,7 @@ import { formatPicture } from "../../../utils";
 import { FollowButton } from "../../components/FollowButton";
 import "../../styles/ProfilePage.css";
 import UserProfile, { UserBalance } from "@/app/components/UserProfile";
+import Link from "next/link";
 
 export default function Profile() {
   const pathName = usePathname();
@@ -24,6 +25,13 @@ export default function Profile() {
   return (
     <div>
       <div className="profile-page">
+        <div className="main-screen-heading-upper-row">
+          <div className="main-screen-heading-upper-row-left">
+            <div className="main-screen-heading-upper-row-left-title">
+              <Link href={`/`}>📦 FrensBox</Link>
+            </div>
+          </div>
+        </div>
         <div className="profile-info">
           <div className="profile-picture-name-bar">
             {profile?.picture?.__typename === "MediaSet" && (

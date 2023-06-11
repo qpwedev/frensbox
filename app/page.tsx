@@ -21,6 +21,7 @@ import Database from "better-sqlite3";
 
 import "./styles/ConnectPage.css";
 import "./styles/MainScreen.css";
+import { formatPicture } from "@/utils";
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState("");
@@ -150,29 +151,31 @@ function ConnectPage({ onLoginClick }: { onLoginClick: () => Promise<void> }) {
 }
 
 function MainScreen({ frens }: { frens: Following[] }) {
+  const { execute: logout } = useWalletLogout();
   return (
     <div className="main-screen">
       <div className="main-screen-heading">
         <div className="main-screen-heading-upper-row">
           <div className="main-screen-heading-upper-row-left">
-            <div className="main-screen-heading-upper-row-left-logo">
-              <img src="box.svg" alt="a friend box" />
-            </div>
             <div className="main-screen-heading-upper-row-left-title">
-              FRENSBOX
+              <Link href={`/`}>📦 FrensBox</Link>
             </div>
           </div>
           <div className="main-screen-heading-upper-row-right">
-            <button>Log Out</button>
+            <button
+              onClick={logout}
+              className="main-screen-heading-upper-row-right-btn"
+            >
+              Log Out
+            </button>
           </div>
         </div>
         <div className="main-screen-heading-frens">
-          <p className="main-screen-heading-frens-number">230</p>
-          <p className="main-screen-heading-frens-text">frens</p>
+          <p className="main-screen-heading-frens-number">5 frens</p>
         </div>
-        <div className="main-screen-heading-lower-row">
+        <div className="add-handle-input">
           <input
-            className="main-screen-heading-lower-row-input"
+            className="input-text-hadnle"
             type="text"
             // onSubmit={handleFollowSubmit}
           />
@@ -205,15 +208,25 @@ function FrensList({ list, limit }: { list: Following[]; limit: number }) {
 
 function FrensListItem({ frenRaw }: { frenRaw: Following }) {
   const fren = frenRaw.profile;
+  console.log(fren);
   return (
     <div className="frens-list-item">
-      <div className="frens-list-item-img">
-        <img src={fren.picture.original.url} alt="fren's picture" />
+      <div className="frens-list-item-img---">
+        {/* {fren?.picture && (
+          <img
+            src={formatPicture(fren.picture)}
+            className="frens-list-item-img"
+            alt="fren's picture"
+          />
+        )} */}
+
         <div className="frens-list-item-handle">
           {fren.handle ? fren.handle : "No handle"}
         </div>
       </div>
-      <button className="frens-list-item-button">view</button>
+      <button className="frens-list-item-button">
+        <Link href={`/profile/${fren.handle}`}>View</Link>
+      </button>
     </div>
   );
 }

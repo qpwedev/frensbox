@@ -59,28 +59,28 @@ export function UserBalance({ address }: { address: string }) {
         <p className="wallet-balance">
           ETH: {parseFloat(balanceEth).toFixed(2)}
         </p>
-        {loadingEth && <p>Loading...</p>}
+        {loadingEth && <p></p>}
         {errorEth && <p>Error: {errorEth}</p>}
       </div>
       <div className="colu">
         <p className="wallet-balance">
           OPTIMISM: {parseFloat(balanceOptimism).toFixed(2)}
         </p>
-        {loadingOptimism && <p>Loading...</p>}
+        {loadingOptimism && <p></p>}
         {errorOptimism && <p>Error: {errorOptimism}</p>}
       </div>
       <div className="colu">
         <p className="wallet-balance">
           POLYGON: {parseFloat(balancePolygon).toFixed(2)}
         </p>
-        {loadingPolygon && <p>Loading...</p>}
+        {loadingPolygon && <p></p>}
         {errorPolygon && <p>Error: {errorPolygon}</p>}
       </div>
       <div className="colu">
         <p className="wallet-balance">
           GNO: {parseFloat(balanceGnosis).toFixed(2)}
         </p>
-        {loadingGnosis && <p>Loading...</p>}
+        {loadingGnosis && <p></p>}
         {errorGnosis && <p>Error: {errorGnosis}</p>}
       </div>
     </div>

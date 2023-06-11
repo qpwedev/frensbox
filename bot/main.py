@@ -14,7 +14,7 @@ async def send_welcome(message: types.Message):
     db.insert_user(message.from_user.id, message.from_user.username)
 
     web_app = WebAppInfo()
-    web_app.url = "https://376e-193-85-0-102.ngrok-free.app"
+    web_app.url = "https://3695-62-168-58-186.ngrok-free.app"
 
     keyboard = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton(
