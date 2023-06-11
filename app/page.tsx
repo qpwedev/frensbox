@@ -14,6 +14,7 @@ import { useState } from "react";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import UserProfile from "./components/UserProfile";
 import LensExploreProfiles from "./components/LensExploreProfiles";
+import LensProfileSearch from "./components/LensProfileSearch";
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState("");
@@ -97,25 +98,11 @@ export default function Home() {
       )}
 
       {/* Search component  LensProfileSearch*/}
-      <form onSubmit={handleSearchSubmit}>
-        <input
-          type="text"
-          value={searchInput}
-          onChange={handleSearchChange}
-          placeholder="Search profiles"
-          className="mt-2 px-4 py-2 bg-white text-black rounded"
-        />
-        {searchInput && (
-          <Link href={`/profile/${searchInput}.lens`}>
-            <button
-              type="submit"
-              className="ml-2 px-4 py-2 bg-white text-black rounded"
-            >
-              Go
-            </button>
-          </Link>
-        )}
-      </form>
+      <LensProfileSearch
+        handleSearchChange={handleSearchChange}
+        handleSearchSubmit={handleSearchSubmit}
+        searchInput={searchInput}
+      />
 
       {/* Explore component LensExploreProfiles */}
       <LensExploreProfiles following={following || []} />
