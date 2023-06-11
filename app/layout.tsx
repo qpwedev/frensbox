@@ -37,12 +37,7 @@ export default function RootLayout({
       />
       <WagmiConfig client={client}>
         <LensProvider config={lensConfig}>
-          <body>
-            <Link className="p-20 text-5xl" href="/">
-              FrensBox
-            </Link>
-            {children}
-          </body>
+          <body>{children}</body>
         </LensProvider>
       </WagmiConfig>
     </html>

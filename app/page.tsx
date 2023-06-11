@@ -16,6 +16,8 @@ import LensExploreProfiles from "./components/LensExploreProfiles";
 import LensProfileSearch from "./components/LensProfileSearch";
 import WalletConnect from "./components/WalletConnect";
 
+import "./styles/ConnectPage.css";
+
 export default function Home() {
   const [searchInput, setSearchInput] = useState("");
 
@@ -68,10 +70,9 @@ export default function Home() {
   };
 
   return (
-    <div className="p-20">
-      {loading && <p>Loading...</p>}
-
-      <WalletConnect
+    <div>
+      <ConnectPage />
+      {/* <WalletConnect
         isLoginPending={isLoginPending}
         onLoginClick={onLoginClick}
         wallet={wallet}
@@ -85,7 +86,70 @@ export default function Home() {
         searchInput={searchInput}
       />
 
-      <LensExploreProfiles following={following || []} />
+      <LensExploreProfiles following={following || []} /> */}
+    </div>
+  );
+}
+
+function MainPage() {}
+
+function ConnectPage() {
+  return (
+    <div className="connect-page">
+      <div className="connect-page-heading-section">
+        <h1 className="connect-page-heading-section-heading">
+          CREATE YOUR FRENSBOX
+        </h1>
+        <img
+          className="connect-page-heading-section-img"
+          src="box.svg"
+          alt="A box of friends"
+        />
+      </div>
+      <div className="connect-page-text-section">
+        <div className="connect-page-text">
+          <div className="connect-page-text-img">
+            <img src="heart.svg" alt="" />
+          </div>
+          <div className="connect-page-text-p">
+            <h3 className="connect-page-text-p-heading">
+              meaningful connections
+            </h3>
+            <p className="connect-page-text-p-heading-text">
+              note the shared interests and get personalized AI reminders
+            </p>
+          </div>
+        </div>
+        <div className="connect-page-text">
+          <div className="connect-page-text-img">
+            <img src="nails.png" alt="" />
+          </div>
+          <div className="connect-page-text-p">
+            <h3 className="connect-page-text-p-heading">
+              own our social graph
+            </h3>
+            <p className="connect-page-text-p-heading-text">
+              all the connections stored on Lens Protocol on-chain
+            </p>
+          </div>
+        </div>
+        <div className="connect-page-text">
+          <div className="connect-page-text-img">
+            <img src="butterfly.svg" alt="" />
+          </div>
+          <div className="connect-page-text-p">
+            <h3 className="connect-page-text-p-heading">
+              true web3 dev native experience
+            </h3>
+            <p className="connect-page-text-p-heading-text">
+              do not leave Telegram. get a Friends tab right here
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="connect-page-button-section">
+        <button className="connect-page-button-section-button">connect</button>
+      </div>
     </div>
   );
 }

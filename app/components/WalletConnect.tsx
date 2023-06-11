@@ -24,10 +24,7 @@ export default function WalletConnect({
 }: WalletConnectProps) {
   if (!wallet && !loading) {
     return (
-      <LoginButton
-        onLoginClick={onLoginClick}
-        isLoginPending={isLoginPending}
-      />
+      <ConnecPage onLoginClick={onLoginClick} isLoginPending={isLoginPending} />
     );
   } else if (wallet && !loading) {
     return <ProfileSummary wallet={wallet} logout={logout} />;
@@ -35,16 +32,8 @@ export default function WalletConnect({
   return <></>;
 }
 
-function LoginButton({ onLoginClick, isLoginPending }: LoginButtonProps) {
-  return (
-    <button
-      className="mt-2 px-6 py-1 bg-white text-black rounded"
-      disabled={isLoginPending}
-      onClick={onLoginClick}
-    >
-      Sign in
-    </button>
-  );
+function ConnecPage({ onLoginClick, isLoginPending }: LoginButtonProps) {
+  return <div></div>;
 }
 
 function ProfileSummary({ wallet, logout }: ProfileSummaryProps) {

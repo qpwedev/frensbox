@@ -1,0 +1,70 @@
+.connect-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.connect-page-heading-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.9rem;
+}
+
+.connect-page-heading-section-heading {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.connect-page-heading-section-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+
+.connect-page-text-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+}
+
+.connect-page-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.connect-page-text-img {
+  width: 3rem;
+}
+
+.connect-page-button-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.connect-page-button-section-button {
+  background-color: #204f24;
+  color: white;
+  border-radius: 10px;
+  padding: 15px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 60%;
+}
