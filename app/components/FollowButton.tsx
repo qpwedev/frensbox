@@ -19,20 +19,20 @@ function formatButtonText(
   console.log(policy, followStatus);
 
   if (followStatus?.isFollowedByMe === true) {
-    return "Following";
+    return "FOLLOWING";
   }
 
   switch (policy.type) {
     case FollowPolicyType.ONLY_PROFILE_OWNERS:
     case FollowPolicyType.ANYONE:
-      return "Follow";
+      return "FOLLOW";
     case FollowPolicyType.CHARGE:
-      return `Pay ${policy.amount.toSignificantDigits(6)} ${
+      return `PAY ${policy.amount.toSignificantDigits(6)} ${
         policy.amount.asset.symbol
-      } to follow`;
+      } TO FOLLOW`;
 
     default:
-      return `You cannot follow`;
+      return `YOU CANNOT FOLLOW`;
   }
 }
 
@@ -50,7 +50,11 @@ export function FollowButton({ followee, follower }: FollowButtonProps) {
   return (
     <>
       {!isPending && followee?.followStatus && (
-        <button onClick={follow} disabled={!followee?.followStatus?.canFollow}>
+        <button
+          className="follow-button"
+          onClick={follow}
+          disabled={!followee?.followStatus?.canFollow}
+        >
           {formatButtonText(followee.followPolicy, followee.followStatus!)}
         </button>
       )}

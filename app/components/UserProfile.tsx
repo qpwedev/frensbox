@@ -18,17 +18,17 @@ function UserProfile({ following }: { following: Following }) {
             alt={following.profile.handle}
           />
         ) : (
-          <div className="w-14 h-14 bg-slate-500  " />
+          <div className="w-14 h-14 bg-slate-500" />
         )}
         <h3 className="text-3xl my-4">{following.profile.handle}</h3>
-        <UserBalance address={following.profile.ownedBy} />
         <p className="text-xl">{following.profile.bio}</p>
+        <UserBalance address={following.profile.ownedBy} />
       </div>
     </Link>
   );
 }
 
-function UserBalance({ address }: { address: string }) {
+export function UserBalance({ address }: { address: string }) {
   const {
     balance: balanceEth,
     loading: loadingEth,
@@ -54,24 +54,32 @@ function UserBalance({ address }: { address: string }) {
   } = useGnoBalance(address);
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-col">
-        <p className="text-xl">ETH: {balanceEth}</p>
+    <div className="wallets-profile">
+      <div className="colu">
+        <p className="wallet-balance">
+          ETH: {parseFloat(balanceEth).toFixed(2)}
+        </p>
         {loadingEth && <p>Loading...</p>}
         {errorEth && <p>Error: {errorEth}</p>}
       </div>
-      <div className="flex flex-col">
-        <p className="text-xl">OPTIMISM: {balanceOptimism}</p>
+      <div className="colu">
+        <p className="wallet-balance">
+          OPTIMISM: {parseFloat(balanceOptimism).toFixed(2)}
+        </p>
         {loadingOptimism && <p>Loading...</p>}
         {errorOptimism && <p>Error: {errorOptimism}</p>}
       </div>
-      <div className="flex flex-col">
-        <p className="text-xl">POLYGON: {balancePolygon}</p>
+      <div className="colu">
+        <p className="wallet-balance">
+          POLYGON: {parseFloat(balancePolygon).toFixed(2)}
+        </p>
         {loadingPolygon && <p>Loading...</p>}
         {errorPolygon && <p>Error: {errorPolygon}</p>}
       </div>
-      <div className="flex flex-col">
-        <p className="text-xl">GNO: {balanceGnosis}</p>
+      <div className="colu">
+        <p className="wallet-balance">
+          GNO: {parseFloat(balanceGnosis).toFixed(2)}
+        </p>
         {loadingGnosis && <p>Loading...</p>}
         {errorGnosis && <p>Error: {errorGnosis}</p>}
       </div>

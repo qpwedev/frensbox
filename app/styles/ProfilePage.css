@@ -1,0 +1,83 @@
+.publication {
+    background-color: #204F24;
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+}
+
+.publications {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.profile-bio {
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+
+    background-color: #BDFC5A;
+    color: #204F24;
+    border-radius: 20px;
+    padding: 1rem 2rem 1rem 2rem;
+}
+
+.profile-page {
+    padding: 2rem;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.profile-handle {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.profile-picture-name-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.profile-image {
+    border-radius: 9999px;
+}
+
+.follow-button {
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border-radius: 9999px;
+    color: #204F24;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.wallet-balance-record {}
+
+.wallet-balance {
+    font-size: 0.5rem;
+}
+
+.wallets-profile {
+    display: flex;
+    gap: 0.4rem;
+
+}
+
+.profile-balances {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}

@@ -8,6 +8,8 @@ import {
 } from "@lens-protocol/react-web";
 import { formatPicture } from "../../../utils";
 import { FollowButton } from "../../components/FollowButton";
+import "../../styles/ProfilePage.css";
+import UserProfile, { UserBalance } from "@/app/components/UserProfile";
 
 export default function Profile() {
   const pathName = usePathname();
@@ -21,19 +23,30 @@ export default function Profile() {
 
   return (
     <div>
-      <div className="p-14">
-        {profile?.picture?.__typename === "MediaSet" && (
-          <img
-            width="200"
-            height="200"
-            alt={profile.handle}
-            className="rounded-xl"
-            src={formatPicture(profile.picture)}
-          />
-        )}
+      <div className="profile-page">
+        <div className="profile-info">
+          <div className="profile-picture-name-bar">
+            {profile?.picture?.__typename === "MediaSet" && (
+              <img
+                width="50"
+                height="50"
+                alt={profile.handle}
+                className="profile-image"
+                src={formatPicture(profile.picture)}
+              />
+            )}
+            <h1 className="profile-handle">{profile?.handle}</h1>
+          </div>
+          {profile?.bio && <h3 className="profile-bio">{profile?.bio}</h3>}
+        </div>
+
         <FollowButton followee={profile!} follower={activeProfile!} />
-        <h1 className="text-3xl my-3">{profile?.handle}</h1>
-        <h3 className="text-xl mb-4">{profile?.bio}</h3>
+
+        <div className="profile-balances">
+          {profile && profile.ownedBy && (
+            <UserBalance address={profile.ownedBy.toString()} />
+          )}
+        </div>
         {profile && <Publications profile={profile} />}
       </div>
     </div>
@@ -54,9 +67,9 @@ function Publications({ profile }: { profile: Profile }) {
   });
 
   return (
-    <>
+    <div className="publications">
       {publications?.map((pub: any, index: number) => (
-        <div key={index} className="py-4 bg-zinc-900 rounded mb-3 px-4">
+        <div key={index} className="publication">
           <p>{pub.metadata.content}</p>
           {pub.metadata?.media[0]?.original &&
             ["image/jpeg", "image/png"].includes(
@@ -72,6 +85,6 @@ function Publications({ profile }: { profile: Profile }) {
             )}
         </div>
       ))}
-    </>
+    </div>
   );
 }
