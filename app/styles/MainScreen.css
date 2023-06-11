@@ -49,11 +49,14 @@
   height: 100%;
 }
 
+.main-screen-heading-frens-headingg {
+  text-decoration: underline;
+}
+
 .main-screen-heading-frens {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  height: 100%;
   font-size: 2rem;
 }
 

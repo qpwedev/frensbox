@@ -152,44 +152,54 @@ function ConnectPage({ onLoginClick }: { onLoginClick: () => Promise<void> }) {
 
 function MainScreen({ frens }: { frens: Following[] }) {
   const { execute: logout } = useWalletLogout();
+
+  const { data: wallet, loading } = useActiveProfile();
+
   return (
-    <div className="main-screen">
-      <div className="main-screen-heading">
-        <div className="main-screen-heading-upper-row">
-          <div className="main-screen-heading-upper-row-left">
-            <div className="main-screen-heading-upper-row-left-title">
-              <Link href={`/`}>📦 FrensBox</Link>
+    <>
+      <div className="main-screen">
+        <div className="main-screen-heading">
+          <div className="main-screen-heading-upper-row">
+            <div className="main-screen-heading-upper-row-left">
+              <div className="main-screen-heading-upper-row-left-title">
+                <Link href={`/`}>📦 FrensBox</Link>
+              </div>
+            </div>
+            <div className="main-screen-heading-upper-row-right">
+              <button
+                onClick={logout}
+                className="main-screen-heading-upper-row-right-btn"
+              >
+                Log Out
+              </button>
             </div>
           </div>
-          <div className="main-screen-heading-upper-row-right">
-            <button
-              onClick={logout}
-              className="main-screen-heading-upper-row-right-btn"
-            >
-              Log Out
+          <div className="main-screen-heading-frens">
+            <p className="main-screen-heading-frens-headingg">
+              <Link href={`/profile/` + wallet?.handle}>{wallet?.handle}</Link>
+            </p>
+            <p className="main-screen-heading-frens-number">
+              {frens.length} frens
+            </p>
+          </div>
+          <div className="add-handle-input">
+            <input
+              className="input-text-hadnle"
+              type="text"
+              // onSubmit={handleFollowSubmit}
+            />
+            <button className="main-screen-heading-lower-row-button">
+              add frens
             </button>
           </div>
         </div>
-        <div className="main-screen-heading-frens">
-          <p className="main-screen-heading-frens-number">5 frens</p>
-        </div>
-        <div className="add-handle-input">
-          <input
-            className="input-text-hadnle"
-            type="text"
-            // onSubmit={handleFollowSubmit}
-          />
-          <button className="main-screen-heading-lower-row-button">
-            add frens
-          </button>
+        <div className="main-screen-body">
+          <div className="main-screen-body-frens">
+            <FrensList list={frens} limit={30} />
+          </div>
         </div>
       </div>
-      <div className="main-screen-body">
-        <div className="main-screen-body-frens">
-          <FrensList list={frens} limit={30} />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
