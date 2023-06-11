@@ -10,11 +10,12 @@ import {
   useActiveProfile,
 } from "@lens-protocol/react-web";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import LensExploreProfiles from "./components/LensExploreProfiles";
 import LensProfileSearch from "./components/LensProfileSearch";
 import WalletConnect from "./components/WalletConnect";
+import Database from "better-sqlite3";
 
 import "./styles/ConnectPage.css";
 
