@@ -20,6 +20,7 @@
   font-size: 1.75rem;
   font-weight: bold;
   text-align: center;
+  line-height: 2rem;
 }
 
 .connect-page-heading-section-img {
@@ -33,7 +34,7 @@
 .connect-page-text-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   gap: 1.8rem;
 }
@@ -60,11 +61,15 @@
 .connect-page-button-section-button {
   background-color: #204f24;
   color: white;
-  border-radius: 10px;
+  border-radius: 9999px;
   padding: 15px;
   border: none;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   width: 60%;
+}
+
+.connect-page-text-p {
+  margin-left: 1rem;
 }
