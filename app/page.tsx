@@ -1,5 +1,7 @@
 "use client";
 import {
+  Following,
+  Profile,
   useExploreProfiles,
   useProfileFollowing,
 } from "@lens-protocol/react-web";
@@ -13,6 +15,8 @@ import {
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useState } from "react";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import useEVMBalance, { AvailableChains } from "./hooks/useEVMBalance";
+import useGnoBalance from "./hooks/useGnoBalance";
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState("");
@@ -115,24 +119,89 @@ export default function Home() {
 
       <h1 className="text-5xl">My Lens Frens</h1>
       {following?.map((following, index) => (
-        <Link href={`/profile/${following.profile.handle}`} key={index}>
-          <div className="my-14">
-            {following.profile.picture &&
-            following.profile.picture.__typename === "MediaSet" ? (
-              <img
-                src={formatPicture(following.profile.picture)}
-                width="120"
-                height="120"
-                alt={following.profile.handle}
-              />
-            ) : (
-              <div className="w-14 h-14 bg-slate-500  " />
-            )}
-            <h3 className="text-3xl my-4">{following.profile.handle}</h3>
-            <p className="text-xl">{following.profile.bio}</p>
-          </div>
-        </Link>
+        <UserProfile following={following} key={index} />
       ))}
+    </div>
+  );
+}
+
+function UserProfile({
+  following,
+  key,
+}: {
+  following: Following;
+  key: number;
+}) {
+  console.log();
+  return (
+    <Link href={`/profile/${following.profile.handle}`} key={key}>
+      <div className="my-14">
+        {following.profile.picture &&
+        following.profile.picture.__typename === "MediaSet" ? (
+          <img
+            src={formatPicture(following.profile.picture)}
+            width="120"
+            height="120"
+            alt={following.profile.handle}
+          />
+        ) : (
+          <div className="w-14 h-14 bg-slate-500  " />
+        )}
+        <h3 className="text-3xl my-4">{following.profile.handle}</h3>
+        <UserBalance address={following.profile.ownedBy} />
+        <p className="text-xl">{following.profile.bio}</p>
+      </div>
+    </Link>
+  );
+}
+
+function UserBalance({ address }: { address: string }) {
+  const {
+    balance: balanceEth,
+    loading: loadingEth,
+    error: errorEth,
+  } = useEVMBalance(address, "ethereum" as AvailableChains);
+
+  const {
+    balance: balanceOptimism,
+    loading: loadingOptimism,
+    error: errorOptimism,
+  } = useEVMBalance(address, "optimism" as AvailableChains);
+
+  const {
+    balance: balancePolygon,
+    loading: loadingPolygon,
+    error: errorPolygon,
+  } = useEVMBalance(address, "polygon" as AvailableChains);
+
+  const {
+    balance: balanceGnosis,
+    loading: loadingGnosis,
+    error: errorGnosis,
+  } = useGnoBalance(address);
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex flex-col">
+        <p className="text-xl">ETH: {balanceEth}</p>
+        {loadingEth && <p>Loading...</p>}
+        {errorEth && <p>Error: {errorEth}</p>}
+      </div>
+      <div className="flex flex-col">
+        <p className="text-xl">OPTIMISM: {balanceOptimism}</p>
+        {loadingOptimism && <p>Loading...</p>}
+        {errorOptimism && <p>Error: {errorOptimism}</p>}
+      </div>
+      <div className="flex flex-col">
+        <p className="text-xl">POLYGON: {balancePolygon}</p>
+        {loadingPolygon && <p>Loading...</p>}
+        {errorPolygon && <p>Error: {errorPolygon}</p>}
+      </div>
+      <div className="flex flex-col">
+        <p className="text-xl">GNO: {balanceGnosis}</p>
+        {loadingGnosis && <p>Loading...</p>}
+        {errorGnosis && <p>Error: {errorGnosis}</p>}
+      </div>
     </div>
   );
 }
