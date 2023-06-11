@@ -12,9 +12,9 @@ import {
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useState } from "react";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
-import UserProfile from "./components/UserProfile";
 import LensExploreProfiles from "./components/LensExploreProfiles";
 import LensProfileSearch from "./components/LensProfileSearch";
+import WalletConnect from "./components/WalletConnect";
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState("");
@@ -71,40 +71,20 @@ export default function Home() {
     <div className="p-20">
       {loading && <p>Loading...</p>}
 
-      {/* Wallet connect component WalletConnect */}
-      {!wallet && !loading && (
-        <button
-          className="mt-2 px-6 py-1 bg-white text-black rounded"
-          disabled={isLoginPending}
-          onClick={onLoginClick}
-        >
-          Sign in
-        </button>
-      )}
-      {wallet && !loading && (
-        <div>
-          <Link href={`/profile/${wallet.handle}`}>
-            <h3 className="text-3xl">{wallet.handle}</h3>
-          </Link>
-          <p>{wallet.bio}</p>
+      <WalletConnect
+        isLoginPending={isLoginPending}
+        onLoginClick={onLoginClick}
+        wallet={wallet}
+        loading={loading}
+        logout={logout}
+      />
 
-          <button
-            onClick={logout}
-            className="mt-2 px-6 py-1 bg-white text-black rounded"
-          >
-            Sign out
-          </button>
-        </div>
-      )}
-
-      {/* Search component  LensProfileSearch*/}
       <LensProfileSearch
         handleSearchChange={handleSearchChange}
         handleSearchSubmit={handleSearchSubmit}
         searchInput={searchInput}
       />
 
-      {/* Explore component LensExploreProfiles */}
       <LensExploreProfiles following={following || []} />
     </div>
   );
