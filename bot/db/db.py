@@ -21,8 +21,18 @@ class Database:
                 CREATE TABLE IF NOT EXISTS users (
                     user_id INTEGER PRIMARY KEY,
                     username TEXT NOT NULL UNIQUE,
+                    lens_handle TEXT UNIQUE,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
+            """)
+
+            # Create user_interests table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS user_interests (
+                user_id INTEGER,
+                interest TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users (user_id)
+            );
             """)
 
             # Create friends table
@@ -48,15 +58,27 @@ class Database:
         except Error as e:
             print(e)
 
-    def insert_user(self, user_id, username):
+    def insert_user(self, user_id, username, lens_handle=None):
         cur = self.conn.cursor()
         cur.execute(
-            "INSERT OR IGNORE INTO users (user_id, username) VALUES (?, ?)", (user_id, username,))
+            "INSERT OR IGNORE INTO users (user_id, username, lens_handle) VALUES (?, ?, ?)", (user_id, username, lens_handle,))
         self.conn.commit()
 
     def delete_user(self, user_id):
         cur = self.conn.cursor()
         cur.execute("DELETE FROM users WHERE user_id = ?", (user_id,))
+        self.conn.commit()
+
+    def insert_interest(self, user_id, interest):
+        cur = self.conn.cursor()
+        cur.execute(
+            "INSERT INTO user_interests (user_id, interest) VALUES (?, ?)", (user_id, interest,))
+        self.conn.commit()
+
+    def delete_interest(self, user_id, interest):
+        cur = self.conn.cursor()
+        cur.execute(
+            "DELETE FROM user_interests WHERE user_id = ? AND interest = ?", (user_id, interest,))
         self.conn.commit()
 
     def insert_friend(self, friend_1_id, friend_2_id):
