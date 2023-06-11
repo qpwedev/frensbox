@@ -340,3 +340,7 @@ settings.json
 
 
 bot/config.py
+
+env.js
+
+config.ts

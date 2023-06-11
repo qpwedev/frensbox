@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { utils } from "ethers";
+import { env } from "../config";
 
 export type AvailableChains = "ethereum" | "near" | "optimism" | "polygon";
 
@@ -17,7 +18,7 @@ export default function useEVMBalance(address: string, chain: AvailableChains) {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer",
+              Authorization: `Bearer ${env.GATEWAY_BEARER_TOKEN}`,
             },
             body: JSON.stringify({
               jsonrpc: "2.0",
